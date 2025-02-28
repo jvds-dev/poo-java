@@ -20,8 +20,8 @@ public class Character {
     }
 
     public void takeDamage(int ammount){
-        healthPoints -= ammount;
-        System.out.println(name + " has " + healthPoints + "HP left.");
+        healthPoints = Math.max(healthPoints - ammount, 0);
+        System.out.println(healthPoints == 0 ? name + " is dead." : name + " has " + healthPoints + " HP left." );
     }
 
     public void attack(Character target, int damage){

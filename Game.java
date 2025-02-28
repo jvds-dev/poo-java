@@ -5,6 +5,9 @@ public class Game {
 
         System.out.println(player.getName() + " vs " + skeleton.getName());
         player.attack(skeleton, 10);
+        player.attack(skeleton, 30);
+        player.attack(skeleton, 20);
+        player.attack((skeleton), 100);
 
     }
 }
