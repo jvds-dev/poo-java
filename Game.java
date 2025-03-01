@@ -5,6 +5,7 @@ public class Game {
     private Player player;
     private Scanner scanner;
     private Enemy enemy;
+    private Battle battle;
 
     public Game(){
         map = new Map(5, 5);
@@ -13,12 +14,13 @@ public class Game {
         scanner = new Scanner(System.in);
         enemy = new Enemy("Skeleton", 50, 4, 4);
         map.addElement(enemy.getX(), enemy.getY(), 'S');
+        battle = new Battle(player, enemy);
     }
 
     public void start(){
-        while (true) {
+        while (player.getHealthPoints() > 0) {
             map.displayMap();
-            System.out.println("Digite W, A, S ou D para mover: ");
+            System.out.println("Move with W/A/S/D: ");
             char direction = scanner.next().toUpperCase().charAt(0);
             moveCharacter(direction);
         }
@@ -33,39 +35,20 @@ public class Game {
             case 'A': newY--; break;
             case 'S': newX++; break;
             case 'D': newY++; break;
-            default: System.out.println("Movimento inválido! Tente W/A/S/D "); return;
+            default: System.out.println("Invalid move! Try W/A/S/D "); return;
         }
 
         if(newX < 0 || newX >= map.getSizeX() || newY < 0 || newY >= map.getSizeY()){
             System.out.println("Invalid move [MAP SIZE LIMIT COLLISION]");
             return;
         }
-
         if(map.getElement(newX, newY) == 'S' ){
-            System.out.println("INICIAR BATALHA");
-            startBattle(enemy);
+            System.out.println("STARTING BATTLE");
+            battle.startBattle();
             map.movePlayer(player, newX, newY);
         }
         if(!map.movePlayer(player, newX, newY)){
-            System.out.println("Movimento inválido");
-        }
-    }
-
-    public void startBattle(Enemy enemy){
-        System.out.println(player.getName() + " vs " + enemy.getName());
-
-        while(player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0){
-            player.attack(enemy, 10);
-            if(enemy.getHealthPoints() <= 0){
-                System.out.println(enemy.getName() + " morreu!");
-                break;
-            }
-
-            enemy.attack(player, 5);
-            if(player.getHealthPoints() <= 0){
-                System.out.println(player.getName() + " foi derrotado!");
-                break;
-            }
+            System.out.println("Invalid move!");
         }
     }
 

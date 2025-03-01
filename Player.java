@@ -10,4 +10,5 @@ public class Player extends Character{
         setHealthPoints(newHealth);
         System.out.println(getName() + (newHealth == MAX_HP ? " health is full." : " healed and now have " + newHealth + "HP"));
     }
+
 }
