@@ -1,10 +1,13 @@
 public class Character {
     private String name;
     private int healthPoints;
+    private int x, y;
 
-    public Character(String name, int healthPoints){
+    public Character(String name, int healthPoints, int x, int y){
         this.name = name;
         this.healthPoints = healthPoints;
+        this.x = x;
+        this.y = y;
     }
 
     public String getName(){
@@ -13,6 +16,19 @@ public class Character {
 
     public int getHealthPoints(){
         return healthPoints;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+    
+    public void setPosition(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
     public void setHealthPoints(int newHp){
