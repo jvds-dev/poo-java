@@ -9,10 +9,11 @@ public class Game {
 
     public Game(){
         map = new Map(5, 5);
-        player = new Player("Jvds", 100, 2, 2);
+        player = new Player("Joao", 2, 2, 100, 10, 0.2f);
+        enemy = new Enemy("Skeleton", 4, 4, 50, 10, 0.1f);
+
         map.addElement(player.getX(), player.getY(), 'P');
         scanner = new Scanner(System.in);
-        enemy = new Enemy("Skeleton", 50, 4, 4);
         map.addElement(enemy.getX(), enemy.getY(), 'S');
         battle = new Battle(player, enemy);
     }

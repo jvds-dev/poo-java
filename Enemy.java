@@ -1,6 +1,6 @@
 public class Enemy extends Character{
     
-    public Enemy(String name, int healthPoints, int x, int y){
-        super(name, healthPoints, x, y);
+    public Enemy(String name, int x, int y, int healthPoints, int damagePoints, float critChance){
+        super(name, x, y, healthPoints, damagePoints, critChance);
     }
 }

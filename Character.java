@@ -2,12 +2,17 @@ public class Character {
     private String name;
     private int healthPoints;
     private int x, y;
+    private int damagePoints;
+    private float critChance;
+    // private float dodgeChance;
 
-    public Character(String name, int healthPoints, int x, int y){
+    public Character(String name, int x, int y,int healthPoints, int damagePoints, float critChance){
         this.name = name;
-        this.healthPoints = healthPoints;
         this.x = x;
         this.y = y;
+        this.healthPoints = healthPoints;
+        this.damagePoints = damagePoints;
+        this.critChance = critChance;
     }
 
     public String getName(){
@@ -16,6 +21,14 @@ public class Character {
 
     public int getHealthPoints(){
         return healthPoints;
+    }
+
+    public int getDamagePoints(){
+        return damagePoints;
+    }
+
+    public float getCritChance(){
+        return critChance;
     }
 
     public int getX(){
@@ -40,8 +53,13 @@ public class Character {
         System.out.println(healthPoints == 0 ? name + " is dead." : name + " has " + healthPoints + " HP left." );
     }
 
-    public void attack(Character target, int damage){
-        System.out.println(this.name + " a attacked " + target.name + " causing " + damage + " points of damage!");
+    public void attack(Character target){
+        int damage = this.getDamagePoints();
+        if(Math.random() <= this.getCritChance()){
+            damage = damage * 2;
+            System.out.println("CRITICAL ATTACK!!!");
+        }
+        System.out.println(this.name + " attacked " + target.name + " causing " + damage + " points of damage!");
         target.takeDamage(damage);
     }
 }

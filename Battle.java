@@ -31,14 +31,14 @@ public class Battle {
         System.out.println("1. ATTACK\n2.HEAL");
         int choice = scanner.nextInt();
         switch(choice) {
-            case 1: player.attack(enemy, 10); break;
+            case 1: player.attack(enemy); break;
             case 2: player.heal(10); break;
             default: System.out.println("Invalid option!"); break;
         }
     }
 
     public void enemyTurn(){
-        enemy.attack(player, 10);
+        enemy.attack(player);
     }
 
 
