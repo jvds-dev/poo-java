@@ -43,4 +43,11 @@ public class Map {
         return matrix[x][y];
     }
 
+    public int getSizeX(){
+        return sizeX;
+    }
+    public int getSizeY(){
+        return sizeY;
+    }
+
 }

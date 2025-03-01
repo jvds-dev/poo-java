@@ -35,18 +35,38 @@ public class Game {
             case 'D': newY++; break;
             default: System.out.println("Movimento inválido! Tente W/A/S/D "); return;
         }
+
+        if(newX < 0 || newX >= map.getSizeX() || newY < 0 || newY >= map.getSizeY()){
+            System.out.println("Invalid move [MAP SIZE LIMIT COLLISION]");
+            return;
+        }
+
         if(map.getElement(newX, newY) == 'S' ){
             System.out.println("INICIAR BATALHA");
             startBattle(enemy);
             map.movePlayer(player, newX, newY);
         }
-        else if(!map.movePlayer(player, newX, newY)){
+        if(!map.movePlayer(player, newX, newY)){
             System.out.println("Movimento inválido");
         }
     }
 
     public void startBattle(Enemy enemy){
         System.out.println(player.getName() + " vs " + enemy.getName());
+
+        while(player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0){
+            player.attack(enemy, 10);
+            if(enemy.getHealthPoints() <= 0){
+                System.out.println(enemy.getName() + " morreu!");
+                break;
+            }
+
+            enemy.attack(player, 5);
+            if(player.getHealthPoints() <= 0){
+                System.out.println(player.getName() + " foi derrotado!");
+                break;
+            }
+        }
     }
 
     public static void main(String[] args){
