@@ -39,5 +39,8 @@ public class Map {
     public void addElement(int x, int y, char element){
         matrix[x][y] = element;
     }
+    public char getElement(int x, int y){
+        return matrix[x][y];
+    }
 
 }

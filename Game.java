@@ -4,12 +4,15 @@ public class Game {
     private Map map;
     private Player player;
     private Scanner scanner;
+    private Enemy enemy;
 
     public Game(){
         map = new Map(5, 5);
         player = new Player("Jvds", 100, 2, 2);
         map.addElement(player.getX(), player.getY(), 'P');
         scanner = new Scanner(System.in);
+        enemy = new Enemy("Skeleton", 50, 4, 4);
+        map.addElement(enemy.getX(), enemy.getY(), 'S');
     }
 
     public void start(){
@@ -32,9 +35,18 @@ public class Game {
             case 'D': newY++; break;
             default: System.out.println("Movimento inválido! Tente W/A/S/D "); return;
         }
-        if(!map.movePlayer(player, newX, newY)){
+        if(map.getElement(newX, newY) == 'S' ){
+            System.out.println("INICIAR BATALHA");
+            startBattle(enemy);
+            map.movePlayer(player, newX, newY);
+        }
+        else if(!map.movePlayer(player, newX, newY)){
             System.out.println("Movimento inválido");
         }
+    }
+
+    public void startBattle(Enemy enemy){
+        System.out.println(player.getName() + " vs " + enemy.getName());
     }
 
     public static void main(String[] args){
