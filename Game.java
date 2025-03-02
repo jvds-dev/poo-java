@@ -7,6 +7,7 @@ public class Game {
     private Enemy enemy;
     private Battle battle;
     private String lastOutput = "Move with W,A,S,D [Confirm with ENTER]: ";
+    private ScreenManager screen = new ScreenManager();
 
     public Game(){
         map = new Map(5, 5);
@@ -21,14 +22,13 @@ public class Game {
 
     public void start(){
         while (player.getHealthPoints() > 0) {
-            clearConsole();
+            screen.clearConsole();
             System.out.println(lastOutput);
             System.out.println("=========");
             map.displayMap();
             char direction = scanner.next().toUpperCase().charAt(0);
             moveCharacter(direction);
         }
-        // lastOutput = "";
     }
 
     public void moveCharacter(char direction){
@@ -55,15 +55,6 @@ public class Game {
         }
         if(!map.movePlayer(player, newX, newY)){
             lastOutput = "Invalid move!";
-        }
-    }
-
-    public void clearConsole(){
-        try{
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        }
-        catch(Exception e){
-            e.printStackTrace();
         }
     }
 

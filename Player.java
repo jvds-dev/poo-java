@@ -5,10 +5,10 @@ public class Player extends Character{
         super(name, x, y, healthPoints, damagePoints, critChance);
     }
 
-    public void heal(int ammount){
+    public String heal(int ammount){
         int newHealth = Math.min(getHealthPoints() + ammount, MAX_HP);
         setHealthPoints(newHealth);
-        System.out.println(getName() + (newHealth == MAX_HP ? " health is full." : " healed and now have " + newHealth + "HP"));
+        return this.getName() + (newHealth == MAX_HP ? " health is full." : " healed and now have " + newHealth + "HP");
     }
 
 }

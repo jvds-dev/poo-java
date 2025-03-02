@@ -50,16 +50,18 @@ public class Character {
 
     public void takeDamage(int ammount){
         healthPoints = Math.max(healthPoints - ammount, 0);
-        System.out.println(healthPoints == 0 ? name + " is dead." : name + " has " + healthPoints + " HP left." );
     }
 
-    public void attack(Character target){
+    public String attack(Character target){
         int damage = this.getDamagePoints();
         if(Math.random() <= this.getCriticalChance()){
             damage = damage * 2;
-            System.out.println("CRITICAL ATTACK!!!");
+            target.takeDamage(damage);
+            return this.getName() + " critical attacked " + target.getName() + " causing " + damage + " damage to it's HP!";
         }
-        System.out.println(this.name + " attacked " + target.name + " causing " + damage + " points of damage!");
-        target.takeDamage(damage);
+        else{
+            target.takeDamage(damage);
+            return this.getName() + " attacked " + target.getName()  + " causing " + damage + " damage to it's HP!";
+        }
     }
 }
