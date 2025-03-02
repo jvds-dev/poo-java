@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class Battle {
     private Scanner scanner;
     private Player player;
@@ -15,7 +14,6 @@ public class Battle {
 
     public void startBattle(){
         while(player.getHealthPoints() > 0 && enemy.getHealthPoints() > 0){
-
             screen.clearConsole();
             if(turnOutput[0] != null && turnOutput[1] != null){
                 System.out.println(turnOutput[0] + "\n" + turnOutput[1]);
@@ -36,6 +34,15 @@ public class Battle {
             if(player.getHealthPoints() <= 0){
                 break;
             }
+        }
+        if (player.getHealthPoints() <= 0) {
+            System.out.println(player.getName() + " died!");
+        }
+        else{
+            System.out.println(player.getName() + " defeated " + enemy.getName());
+            System.out.println("Press ENTER to continue: ");
+            scanner.nextLine();
+            scanner.nextLine();
         }
     }
 
