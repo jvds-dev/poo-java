@@ -1,6 +1,7 @@
 public class Map {
     private char[][] matrix;
     private int sizeX, sizeY;
+    private ScreenManager screen = new ScreenManager();
 
     public Map(int x, int y){
         this.sizeX = x;
@@ -20,7 +21,17 @@ public class Map {
     public void displayMap(){
         for (char[] row : matrix){
             for(char c : row){
-                System.out.print(c + " ");
+                switch(c){
+                    case 'P':
+                        System.out.print(screen.colorText(c + " ", screen.YELLOW));
+                        break;
+                    case 'S':
+                        System.out.print(screen.colorText(c + " ", screen.RED));
+                        break;
+                    default:
+                        System.out.print(c + " ");
+                        break;
+                }
             }
             System.out.println();
         }
