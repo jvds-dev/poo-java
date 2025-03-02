@@ -4,7 +4,8 @@ public class Character {
     private int x, y;
     private int damagePoints;
     private float criticalChance;
-    // private float dodgeChance;
+    // private float missChance = 0.2f;
+    private ScreenManager screen = new ScreenManager();
 
     public Character(String name, int x, int y,int healthPoints, int damagePoints, float criticalChance){
         this.name = name;
@@ -57,11 +58,21 @@ public class Character {
         if(Math.random() <= this.getCriticalChance()){
             damage = damage * 2;
             target.takeDamage(damage);
-            return this.getName() + " critical attacked " + target.getName() + " causing " + damage + " damage to it's HP!";
+            return String.format("%s %s %s causing %s damage to it's HP!",
+                                this.getName(),
+                                screen.colorText("critical attacked", screen.RED),
+                                target.getName(),
+                                damage
+                                );
         }
         else{
             target.takeDamage(damage);
-            return this.getName() + " attacked " + target.getName()  + " causing " + damage + " damage to it's HP!";
+            return String.format("%s %s %s causing %s damage to it's HP!",
+                                this.getName(),
+                                screen.colorText("attacked", screen.YELLOW),
+                                target.getName(),
+                                damage
+                                );
         }
     }
 }
