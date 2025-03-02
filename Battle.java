@@ -22,7 +22,7 @@ public class Battle {
             enemyTurn();
             if(player.getHealthPoints() <= 0){
                 break;
-            };
+            }
         }
     }
 

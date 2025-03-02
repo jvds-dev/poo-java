@@ -6,6 +6,7 @@ public class Game {
     private Scanner scanner;
     private Enemy enemy;
     private Battle battle;
+    private String lastOutput = "Move with W,A,S,D [Confirm with ENTER]: ";
 
     public Game(){
         map = new Map(5, 5);
@@ -21,11 +22,13 @@ public class Game {
     public void start(){
         while (player.getHealthPoints() > 0) {
             clearConsole();
+            System.out.println(lastOutput);
+            System.out.println("=========");
             map.displayMap();
-            System.out.println("Move with W/A/S/D: ");
             char direction = scanner.next().toUpperCase().charAt(0);
             moveCharacter(direction);
         }
+        // lastOutput = "";
     }
 
     public void moveCharacter(char direction){
@@ -37,20 +40,21 @@ public class Game {
             case 'A': newY--; break;
             case 'S': newX++; break;
             case 'D': newY++; break;
-            default: System.out.println("Invalid move! Try W/A/S/D "); return;
+            default: lastOutput = "Invalid move! Try W, A, S or D "; return;
         }
+        lastOutput = "Move with W,A,S,D [Confirm with ENTER]: ";
 
         if(newX < 0 || newX >= map.getSizeX() || newY < 0 || newY >= map.getSizeY()){
-            System.out.println("Invalid move [MAP SIZE LIMIT COLLISION]");
+            lastOutput = "Invalid move [MAP SIZE LIMIT COLLISION]";
             return;
         }
         if(map.getElement(newX, newY) == 'S' ){
-            System.out.println("STARTING BATTLE");
+            // lastOutput += "\nSTARTING BATTLE";
             battle.startBattle();
             map.movePlayer(player, newX, newY);
         }
         if(!map.movePlayer(player, newX, newY)){
-            System.out.println("Invalid move!");
+            lastOutput = "Invalid move!";
         }
     }
 
