@@ -16,7 +16,7 @@ public class Game {
         map.addElement(player.getX(), player.getY(), 'P');
         scanner = new Scanner(System.in);
         map.addElement(enemy.getX(), enemy.getY(), 'S');
-        battle = new Battle(player, enemy);
+        battle = new Battle(player, enemy, scanner);
     }
 
     public void start(){

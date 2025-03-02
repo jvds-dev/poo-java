@@ -5,10 +5,10 @@ public class Battle {
     private Player player;
     private Enemy enemy;
     
-    public Battle(Player player, Enemy enemy){
+    public Battle(Player player, Enemy enemy, Scanner scanner){
         this.player = player;
         this.enemy = enemy;
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     public void startBattle(){
