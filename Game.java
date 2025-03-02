@@ -10,7 +10,7 @@ public class Game {
     public Game(){
         map = new Map(5, 5);
         player = new Player("Joao", 2, 2, 100, 10, 0.2f);
-        enemy = new Enemy("Skeleton", 4, 4, 50, 10, 0.1f);
+        enemy = new Enemy("Skeleton", 4, 4, 50, 10, 1f);
 
         map.addElement(player.getX(), player.getY(), 'P');
         scanner = new Scanner(System.in);
@@ -20,6 +20,7 @@ public class Game {
 
     public void start(){
         while (player.getHealthPoints() > 0) {
+            clearConsole();
             map.displayMap();
             System.out.println("Move with W/A/S/D: ");
             char direction = scanner.next().toUpperCase().charAt(0);
@@ -50,6 +51,15 @@ public class Game {
         }
         if(!map.movePlayer(player, newX, newY)){
             System.out.println("Invalid move!");
+        }
+    }
+
+    public void clearConsole(){
+        try{
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 
