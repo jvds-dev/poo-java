@@ -26,6 +26,7 @@ public class Battle {
                                 enemy.getHealthPoints()));
 
             playerTurn();
+            screen.clearConsole();
             if(enemy.getHealthPoints() <= 0){
                 break;
             }
@@ -47,10 +48,24 @@ public class Battle {
     }
 
     public void playerTurn(){
-        System.out.println("=============================");
-        System.out.println("MAKE YOUR MOVE:");
-        System.out.println("1. ATTACK\n2. HEAL");
-        int choice = scanner.nextInt();
+        
+        int choice = -1;
+
+        while(true){
+            System.out.println("=============================");
+            System.out.println("MAKE YOUR MOVE:");
+            System.out.println("1. ATTACK\n2. HEAL");
+            if(scanner.hasNextInt()){
+                choice = scanner.nextInt();
+                if(choice == 1 || choice == 2){ break; }
+            } 
+            else{
+                screen.clearConsole();
+                System.out.println("Invalid input!");
+                scanner.next();
+            }
+        }
+
         switch(choice) {
             case 1: 
                 turnOutput[0] = player.attack(enemy);
