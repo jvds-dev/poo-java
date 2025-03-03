@@ -1,23 +1,27 @@
 public class Character {
     private String name;
-    private int healthPoints;
-    private int x, y;
-    private int damagePoints;
+    private int x, y, healthPoints, damagePoints;
     private float criticalChance;
+    private char mapElement;
     // private float missChance = 0.2f;
     private ScreenManager screen = new ScreenManager();
 
-    public Character(String name, int x, int y,int healthPoints, int damagePoints, float criticalChance){
+    public Character(String name, int x, int y,int healthPoints, int damagePoints, float criticalChance, char mapElement){
         this.name = name;
         this.x = x;
         this.y = y;
         this.healthPoints = healthPoints;
         this.damagePoints = damagePoints;
         this.criticalChance = criticalChance;
+        this.mapElement = mapElement;
     }
 
     public String getName(){
         return name;
+    }
+
+    public char getMapElement(){
+        return mapElement;
     }
 
     public int getHealthPoints(){

@@ -11,12 +11,12 @@ public class Game {
 
     public Game(){
         map = new Map(5, 5);
-        player = new Player("Joao", 2, 2, 100, 10, 0.2f);
-        enemy = new Enemy("Skeleton", 4, 4, 50, 10, 1f);
+        player = new Player("Joao", 2, 2, 100, 10, 0.2f, 'P');
+        enemy = new Enemy("Skeleton", 4, 4, 50, 10, 1f, 'E');
 
-        map.addElement(player.getX(), player.getY(), 'P');
+        map.addElement(player.getX(), player.getY(), player.getMapElement());
         scanner = new Scanner(System.in);
-        map.addElement(enemy.getX(), enemy.getY(), 'S');
+        map.addElement(enemy.getX(), enemy.getY(), enemy.getMapElement());
         battle = new Battle(player, enemy, scanner);
     }
 
@@ -48,8 +48,7 @@ public class Game {
             lastOutput = "Invalid move [MAP SIZE LIMIT COLLISION]";
             return;
         }
-        if(map.getElement(newX, newY) == 'S' ){
-            // lastOutput += "\nSTARTING BATTLE";
+        if(map.getElement(newX, newY) == enemy.getMapElement() ){
             battle.startBattle();
             map.movePlayer(player, newX, newY);
         }
